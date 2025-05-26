@@ -1,0 +1,95 @@
+/* Content script styles for LocalWrite Assistant */
+
+/* Suggestion panel */
+.lwa-suggestion-panel {
+  position: absolute;
+  z-index: 9999;
+  width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  color: #333;
+  display: none;
+}
+
+.lwa-panel-header {
+  padding: 12px 16px;
+  font-weight: 600;
+  border-bottom: 1px solid #eee;
+  background-color: #f8f9fa;
+  border-radius: 8px 8px 0 0;
+}
+
+.lwa-suggestion-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.lwa-suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.lwa-suggestion-text {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.lwa-explanation {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.lwa-replace-button {
+  padding: 6px 12px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.2s;
+}
+
+.lwa-replace-button:hover {
+  background-color: #2980b9;
+}
+
+/* Error markers */
+.lwa-grammar-error {
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: #e74c3c;
+  text-decoration-thickness: 2px;
+}
+
+.lwa-style-suggestion {
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: #f39c12;
+  text-decoration-thickness: 2px;
+}
+
+/* Tooltip for error explanation */
+.lwa-tooltip {
+  position: absolute;
+  z-index: 10000;
+  background-color: #34495e;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  max-width: 250px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.lwa-tooltip.visible {
+  opacity: 1;
+}

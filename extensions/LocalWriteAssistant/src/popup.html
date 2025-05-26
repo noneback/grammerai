@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LocalWrite Assistant</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>LocalWrite Assistant</h1>
+      <p class="version">v1.0.0</p>
+    </header>
+    
+    <div class="status-container">
+      <div class="status-label">模型状态:</div>
+      <div class="status-value" id="model-status">加载中...</div>
+    </div>
+    
+    <div class="tabs">
+      <button class="tab-button active" data-tab="model">模型设置</button>
+      <button class="tab-button" data-tab="settings">基本设置</button>
+      <button class="tab-button" data-tab="about">关于</button>
+    </div>
+    
+    <div class="tab-content">
+      <!-- 模型设置 -->
+      <div id="model" class="tab-pane active">
+        <div class="form-group">
+          <label for="provider">模型提供商:</label>
+          <select id="provider">
+            <option value="ollama">Ollama (本地)</option>
+            <option value="openai">OpenAI</option>
+            <option value="custom">自定义 API</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="api-url">API URL:</label>
+          <input type="text" id="api-url" placeholder="例如: http://localhost:11434 (Ollama)">
+        </div>
+        
+        <div class="form-group">
+          <label for="api-key">API 密钥:</label>
+          <input type="password" id="api-key" placeholder="API 密钥 (如需要)">
+        </div>
+        
+        <div class="form-group">
+          <label for="model-name">模型名称:</label>
+          <input type="text" id="model-name" placeholder="例如: llama2, gpt-3.5-turbo">
+        </div>
+        
+        <div class="form-group">
+          <label for="temperature">温度 (0-1):</label>
+          <input type="range" id="temperature" min="0" max="1" step="0.1" value="0.3">
+          <span id="temperature-value">0.3</span>
+        </div>
+        
+        <div class="actions">
+          <button id="save-model">保存设置</button>
+          <button id="test-connection">测试连接</button>
+        </div>
+        
+        <div id="connection-result" class="hidden"></div>
+      </div>
+      
+      <!-- 基本设置 -->
+      <div id="settings" class="tab-pane">
+        <div class="setting-item">
+          <label for="highlight-toggle">错误高亮</label>
+          <div class="toggle">
+            <input type="checkbox" id="highlight-toggle" checked>
+            <span class="slider"></span>
+          </div>
+        </div>
+        
+        <div class="setting-item">
+          <label for="suggestion-toggle">显示建议</label>
+          <div class="toggle">
+            <input type="checkbox" id="suggestion-toggle" checked>
+            <span class="slider"></span>
+          </div>
+        </div>
+        
+        <div class="setting-item">
+          <label for="response-speed">响应速度</label>
+          <select id="response-speed">
+            <option value="fast">快速 (低精度)</option>
+            <option value="balanced" selected>平衡</option>
+            <option value="accurate">精确 (较慢)</option>
+          </select>
+        </div>
+        
+        <div class="actions">
+          <button id="save-settings">保存设置</button>
+        </div>
+      </div>
+      
+      <!-- 关于 -->
+      <div id="about" class="tab-pane">
+        <h2>LocalWrite Assistant</h2>
+        <p>版本: 1.0.0</p>
+        <p>一款本地化AI写作辅助工具，提供实时语法纠错与文本优化功能。</p>
+        
+        <h3>特点:</h3>
+        <ul>
+          <li>支持连接到外部AI模型 (Ollama, OpenAI等)</li>
+          <li>实时语法检查与纠错</li>
+          <li>一键替换建议</li>
+          <li>完全本地化处理，保护隐私</li>
+        </ul>
+        
+        <h3>快捷键:</h3>
+        <div class="shortcut-item">
+          <div class="shortcut-key">Ctrl+Enter</div>
+          <div class="shortcut-desc">应用顶部建议</div>
+        </div>
+        <div class="shortcut-item">
+          <div class="shortcut-key">Ctrl+Shift+Space</div>
+          <div class="shortcut-desc">切换建议面板</div>
+        </div>
+      </div>
+    </div>
+    
+    <footer>
+      <div class="memory-usage">
+        <span>内存占用: </span>
+        <span id="memory-value">--</span>
+      </div>
+      <button id="clear-cache">清除缓存</button>
+    </footer>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
